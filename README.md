@@ -32,3 +32,28 @@ int main(){
 }
 ```
 
+## Options
+
+The memoisation operator has the following signature : 
+
+```cpp
+Memo<P, R [, T]> (sdt::function<R(T)> [, int, std::function<std::size_t(T)>]);
+```
+
+Required template parameters
+:
+    - P is the type of the argument of the function. The memoized function can only have one parameter, use tuples several parameters are needed.
+    - R is the return type of the function.
+
+Optional template parameters
+:
+    T is the type of the hash table that is used to store computed values.
+    Default hash table is std::unordered_map but two other tables are implemented. One is a light standard hash table, the other is a size limited hash table.
+    The second may be use to perform memory-limited memoization. More information on that subject may be found on the paper present in this repository.
+
+Arguments
+:
+    - The function to be memoized
+    - The initial size of the hash table used to store data during memoization
+    - The hash function used by the hash table. By default, it is an extension of std::hash which reucrsively hash vectors and tupples.
+
